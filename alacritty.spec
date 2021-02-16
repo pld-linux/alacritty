@@ -88,7 +88,12 @@ EOF
 %build
 export CARGO_HOME="$(pwd)/.cargo"
 
-cargo -v build --release --frozen
+cargo -v build \
+%ifarch x32
+	--target x86_64-unknown-linux-gnux32 \
+%endif
+	--release \
+	--frozen
 
 %install
 rm -rf $RPM_BUILD_ROOT
