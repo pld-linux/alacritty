@@ -1,17 +1,19 @@
+%define		crates_ver 0.7.2
+
 Summary:	A fast, cross-platform, OpenGL terminal emulator
 Name:		alacritty
-Version:	0.7.1
+Version:	0.7.2
 Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/alacritty/alacritty/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	e4d0ac610b4e768102962ddac0c6a53b
+# Source0-md5:	959298871877c4a50e8e2789d23530c7
 # cd alacritty-%{version}
 # cargo vendor
 # cd ..
 # tar cJf alacritty-crates-%{version}.tar.xz alacritty-%{version}/{vendor,Cargo.lock}
 Source1:	%{name}-crates-%{version}.tar.xz
-# Source1-md5:	1279949ca954cd8219740baaa94c1bc5
+# Source1-md5:	4a52bca31af51ceb9214cb932a2d8f8c
 URL:		https://github.com/alacritty/alacritty
 BuildRequires:	cargo
 BuildRequires:	rpmbuild(macros) >= 1.752
@@ -70,7 +72,10 @@ ZSH completion for alacritty command line.
 Dopełnianie linii poleceń programu alacritty dla powłoki ZSH.
 
 %prep
-%setup -q -b1
+%setup -q -a1
+
+%{__mv} %{name}-%{crates_ver}/* .
+sed -i -e 's/@@VERSION@@/%{version}/' Cargo.lock
 
 # use our offline registry
 export CARGO_HOME="$(pwd)/.cargo"
