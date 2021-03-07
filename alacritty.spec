@@ -35,7 +35,7 @@ Summary(pl.UTF-8):	Bashowe dopełnianie linii poleceń programu alacritty
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	bash-completion >= 2.0
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n bash-completion-alacritty
 Bash completion for alacritty command line.
@@ -49,7 +49,7 @@ Summary(pl.UTF-8):	Uzupełnianie nazw w fish dla alacritty
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	fish
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n fish-completion-alacritty
 fish-completion for alacritty.
@@ -63,7 +63,7 @@ Summary(pl.UTF-8):	Dopełnianie linii poleceń programu alacritty dla powłoki Z
 Group:		Applications/Shells
 Requires:	%{name} = %{version}-%{release}
 Requires:	zsh
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n zsh-completion-alacritty
 ZSH completion for alacritty command line.
