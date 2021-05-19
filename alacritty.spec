@@ -16,11 +16,12 @@ Source1:	%{name}-crates-%{crates_ver}.tar.xz
 # Source1-md5:	9a29697227008986242cd801a7be6260
 URL:		https://github.com/alacritty/alacritty
 BuildRequires:	cargo
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.004
 BuildRequires:	rust
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
+ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -93,12 +94,7 @@ EOF
 %build
 export CARGO_HOME="$(pwd)/.cargo"
 
-cargo -v build \
-%ifarch x32
-	--target x86_64-unknown-linux-gnux32 \
-%endif
-	--release \
-	--frozen
+%cargo_build --frozen
 
 %install
 rm -rf $RPM_BUILD_ROOT
