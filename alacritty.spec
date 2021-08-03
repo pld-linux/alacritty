@@ -1,26 +1,32 @@
-%define		crates_ver 0.8.0
+%define		crates_ver 0.9.0
 
 Summary:	A fast, cross-platform, OpenGL terminal emulator
 Name:		alacritty
-Version:	0.8.0
+Version:	0.9.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/alacritty/alacritty/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	47bfc192b29252bab6fb436a1b71458d
+# Source0-md5:	393d34a29db21390964181b73cf9cba1
 # cd alacritty-%{version}
 # cargo vendor
 # cd ..
 # tar cJf alacritty-crates-%{version}.tar.xz alacritty-%{version}/{vendor,Cargo.lock}
 Source1:	%{name}-crates-%{crates_ver}.tar.xz
-# Source1-md5:	9a29697227008986242cd801a7be6260
+# Source1-md5:	7f43543fb0a78f495bb2f6b71ae3a6d7
 URL:		https://github.com/alacritty/alacritty
 BuildRequires:	cargo
+BuildRequires:	fontconfig-devel >= 2.11.1
+BuildRequires:	freetype-devel >= 2.8.0
+BuildRequires:	libxcb-devel
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 2.004
 BuildRequires:	rust
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
+Requires:	fontconfig-libs >= 2.11.1
+Requires:	freetype >= 2.8.0
 ExclusiveArch:	%{rust_arches}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
