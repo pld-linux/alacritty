@@ -20,6 +20,7 @@ BuildRequires:	fontconfig-devel >= 2.11.1
 BuildRequires:	freetype-devel >= 2.8.0
 BuildRequires:	libxcb-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.011
 BuildRequires:	rust >= 1.53.0
 BuildRequires:	tar >= 1:1.22
