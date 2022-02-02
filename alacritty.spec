@@ -1,28 +1,29 @@
-%define		crates_ver 0.9.0
+%define		crates_ver 0.10.0
 
 Summary:	A fast, cross-platform, OpenGL terminal emulator
 Name:		alacritty
-Version:	0.9.0
+Version:	0.10.0
 Release:	1
 License:	Apache v2.0
 Group:		Applications
 Source0:	https://github.com/alacritty/alacritty/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	393d34a29db21390964181b73cf9cba1
+# Source0-md5:	de1486b89b306890d365c5eaf081271d
 # cd alacritty-%{version}
 # cargo vendor
 # cd ..
 # tar cJf alacritty-crates-%{version}.tar.xz alacritty-%{version}/{vendor,Cargo.lock}
 Source1:	%{name}-crates-%{crates_ver}.tar.xz
-# Source1-md5:	7f43543fb0a78f495bb2f6b71ae3a6d7
+# Source1-md5:	c7cfcbf33c842fe2d53dd98b1b49f601
 URL:		https://github.com/alacritty/alacritty
 BuildRequires:	cargo
 BuildRequires:	fontconfig-devel >= 2.11.1
 BuildRequires:	freetype-devel >= 2.8.0
 BuildRequires:	libxcb-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 2.004
-BuildRequires:	rust
+BuildRequires:	rpmbuild(macros) >= 2.011
+BuildRequires:	rust >= 1.53.0
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libxkbcommon-devel
 BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires:	fontconfig-libs >= 2.11.1
@@ -107,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1,%{_desktopdir},%{_datadir}/metainfo,%{_pixmapsdir},%{bash_compdir},%{fish_compdir},%{zsh_compdir}}
 
-cp -p target/release/alacritty $RPM_BUILD_ROOT%{_bindir}
+cp -p %{cargo_objdir}/alacritty $RPM_BUILD_ROOT%{_bindir}
 cp -p extra/alacritty.man $RPM_BUILD_ROOT%{_mandir}/man1/alacritty.1
 cp -p extra/completions/_alacritty $RPM_BUILD_ROOT%{zsh_compdir}/_alacritty
 cp -p extra/completions/alacritty.bash $RPM_BUILD_ROOT%{bash_compdir}/alacritty
